@@ -1,0 +1,42 @@
+--GO
+--USE master
+
+--GO
+--CREATE DATABASE BakuBusDb
+
+--GO 
+--USE BakuBusDb
+
+--GO
+--CREATE TABLE BakuBus(
+--[IX] INT PRIMARY KEY IDENTITY,
+--[PLATE] VARCHAR(12) NULL,
+--[TAG] VARCHAR(8) NULL,
+--[VEHICLEID] VARCHAR(10) NULL,
+--[CARDCODE] VARCHAR (12) NULL
+--)
+
+--GO 
+--CREATE PROC AddBus @Plate VARCHAR(12), @Tag VARCHAR(8), @VehicleId VARCHAR(10), @CardCode VARCHAR(12)
+--AS
+--BEGIN
+--INSERT INTO BakuBus VALUES(@Plate, @Tag, @VehicleId, @CardCode)
+--END
+
+
+--GO
+--CREATE PROC GetBuses
+--AS
+--BEGIN 
+--SELECT [IX], [PLATE],[TAG],[VEHICLEID],[CARDCODE]
+--FROM BakuBus
+--ORDER BY BakuBus.IX
+--END
+
+
+--GO
+--CREATE PROC TruncateBakuBusTable
+--AS
+--BEGIN
+--TRUNCATE TABLE BakuBus
+--END
