@@ -73,6 +73,7 @@ namespace ExcelExportetWpf
 			{
 				FilePathTextBox.Text = openFileDialog.FileName;
 			}
+			ExportDataButton.Focus();
 		}
 
 
@@ -97,12 +98,11 @@ namespace ExcelExportetWpf
 
 				try
 				{
-					await ImportDataAsync(filePath);
-					StatusTextBlock.Text = "Data imported successfully 🧐";
+					var count = await ImportDataAsync(filePath);
+					StatusTextBlock.Text = $"Data imported successfully 🧐 ({count} entities affected)";
 				}
 				catch (Exception ex)
 				{
-					StatusTextBlock.Text = ex.Message;
 					StatusTextBlock.Text = ex.Message;
 				}
 
@@ -119,7 +119,7 @@ namespace ExcelExportetWpf
 
 		}
 
-		public async Task ImportDataAsync(string filePath)
+		public async Task<int> ImportDataAsync(string filePath)
 		{
 			try
 			{
@@ -142,6 +142,7 @@ namespace ExcelExportetWpf
 						Buses.Add(bus);
 					}
 				});
+				return busList.Count;
 			}
 			catch (Exception ex)
 			{
