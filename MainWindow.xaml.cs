@@ -4,8 +4,11 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
+using System.Windows.Threading;
 using EFCore.BulkExtensions;
 using ExcelExportetWpf.Helpers;
 using ExcelExportetWpf.Models;
@@ -38,11 +41,23 @@ namespace ExcelExportetWpf
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
-
+		
+		private readonly DispatcherTimer _timer;
+	
 		public MainWindow()
 		{
 			DataContext = this;
 			InitializeComponent();
+			FilePathTextBox.Text = @"D:\VS\ExcelExportetWpf\Assets\filtered_output_new.xlsx";
+			
+			ExportDataButton_Click(this, null!);
+			
+			_timer = new DispatcherTimer
+			{
+				Interval = TimeSpan.FromSeconds(5) 
+			};
+			_timer.Tick += Timer_Tick!;
+			_timer.Start();
 		}
 
 
@@ -76,13 +91,10 @@ namespace ExcelExportetWpf
 			ExportDataButton.Focus();
 		}
 
-
-
 		private async void ExportDataButton_Click(object sender, RoutedEventArgs e)
 		{
 			try
 			{
-
 				string filePath = FilePathTextBox.Text;
 				if (!File.Exists(filePath)) 
 				{
@@ -91,10 +103,8 @@ namespace ExcelExportetWpf
 					throw new FileNotFoundException("Current file doesn't exist 😕. Please, try again"); 
 				}
 
-
 				ExportDataButton.IsEnabled = false;
 				StatusTextBlock.Text = "Exporting data, please wait ... 😴";
-
 
 				try
 				{
@@ -116,7 +126,6 @@ namespace ExcelExportetWpf
 			{
 				ExportDataButton.IsEnabled = true;
 			}
-
 		}
 
 		public async Task<int> ImportDataAsync(string filePath)
@@ -148,6 +157,10 @@ namespace ExcelExportetWpf
 			{
 				throw new ApplicationException($"Error importing data {ex.Message}");
 			}
+		}
+		private void Timer_Tick(object sender, EventArgs e)
+		{
+			ExportDataButton_Click(this, null!);
 		}
 	}
 }
