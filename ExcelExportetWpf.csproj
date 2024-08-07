@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Socar-Logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EFCore.BulkExtensions" Version="6.8.1" />
     <PackageReference Include="EPPlus" Version="6.2.19" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.32" />
@@ -16,6 +20,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Socar-Logo.png" />
   </ItemGroup>
 
 </Project>
