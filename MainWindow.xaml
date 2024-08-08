@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Background="#dfe4ea"
-        Title="MainWindow" Height="700" Width="1000" FontFamily="Century Gothic" WindowStartupLocation="CenterScreen">
+        Icon="pack://application:,,,/Assets/Exporter Icon.ico"
+        Title="Excel File Handler" Height="700" Width="1000" FontFamily="Century Gothic" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
        
@@ -99,8 +100,6 @@
         
     </Window.Resources>
 
-
-
     <Grid>
         
         <Grid.RowDefinitions>
@@ -122,9 +121,9 @@
             <DataGrid.Columns>
             
                 <DataGridTextColumn Width="90" Header="Plate" Binding="{Binding Plate}" />
-                <DataGridTextColumn Width="90" Header="TagNo" Binding="{Binding Tag}" />
-                <DataGridTextColumn Width="90" Header="VehicleId" Binding="{Binding VehicleId}" />
-                <DataGridTextColumn Width="90" Header="CardNo" Binding="{Binding CardCode}" />
+                <DataGridTextColumn Width="90" Header="Tag Number" Binding="{Binding Tag}" />
+                <DataGridTextColumn Width="90" Header="Vehicle Id" Binding="{Binding VehicleId}" />
+                <DataGridTextColumn Width="90" Header="Card Number" Binding="{Binding CardCode}" />
             
             </DataGrid.Columns>
         </DataGrid>

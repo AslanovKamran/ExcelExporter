@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Exporter Icon.ico" />
     <None Remove="Assets\Socar-Logo.png" />
   </ItemGroup>
 
@@ -23,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Exporter Icon.ico" />
     <Resource Include="Assets\Socar-Logo.png" />
   </ItemGroup>
 

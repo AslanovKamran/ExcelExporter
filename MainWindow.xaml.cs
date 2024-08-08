@@ -4,9 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
 using System.Windows.Threading;
 using EFCore.BulkExtensions;
@@ -35,27 +33,28 @@ namespace ExcelExportetWpf
 			}
 		}
 
+		private readonly DispatcherTimer _timer;
+
 		// Property Changed Event
 		public event PropertyChangedEventHandler? PropertyChanged;
 		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null!)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
-		
-		private readonly DispatcherTimer _timer;
-	
+
 		public MainWindow()
 		{
 			DataContext = this;
 			InitializeComponent();
 			FilePathTextBox.Text = @"D:\VS\ExcelExportetWpf\Assets\filtered_output_new.xlsx";
-			
+
 			ExportDataButton_Click(this, null!);
-			
+
 			_timer = new DispatcherTimer
 			{
-				Interval = TimeSpan.FromSeconds(5) 
+				Interval = TimeSpan.FromSeconds(5)
 			};
+
 			_timer.Tick += Timer_Tick!;
 			_timer.Start();
 		}
@@ -96,11 +95,11 @@ namespace ExcelExportetWpf
 			try
 			{
 				string filePath = FilePathTextBox.Text;
-				if (!File.Exists(filePath)) 
+				if (!File.Exists(filePath))
 				{
 					FilePathTextBox.Clear();
 					FilePathTextBox.Focus();
-					throw new FileNotFoundException("Current file doesn't exist 😕. Please, try again"); 
+					throw new FileNotFoundException("Current file doesn't exist 😕. Please, try again");
 				}
 
 				ExportDataButton.IsEnabled = false;
@@ -164,4 +163,3 @@ namespace ExcelExportetWpf
 		}
 	}
 }
-
